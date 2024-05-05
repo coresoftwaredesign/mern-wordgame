@@ -19,14 +19,9 @@ function getLocalDate() {
 
 export default function App() {
   const [gamedate, setGamedate] = useState(getLocalDate());
-  const [guesses, setGuesses] = useState([
-    new Guess(""),
-    new Guess(""),
-    new Guess(""),
-    new Guess(""),
-    new Guess(""),
-    new Guess(""),
-  ]);
+  const [guesses, setGuesses] = useState(
+    Array.from({ length: 6 }, () => new Guess(""))
+  );
   const [currentGuess, setCurrentGuess] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
@@ -46,14 +41,7 @@ export default function App() {
   }
 
   function resetGame() {
-    setGuesses([
-      new Guess(""),
-      new Guess(""),
-      new Guess(""),
-      new Guess(""),
-      new Guess(""),
-      new Guess(""),
-    ]);
+    setGuesses(Array.from({ length: 6 }, () => new Guess("")));
     setCurrentGuess(0);
     // setGameOver(false);
     showToast("Game Reset");
@@ -66,19 +54,6 @@ export default function App() {
     randomDate.setDate(randomDate.getDate() + Math.floor(Math.random() * 2310));
     setGamedate(randomDate);
   }
-
-  // async function pingApi() {
-  //   try {
-  //     const response = await fetch(
-  //       `${API_URL}`
-  //     );
-  //     const answer = await response.json();
-  //     console.log("pingApi: " + answer);
-  //   } catch (err) {
-  //     showToast("Error: " + err);
-  //   }
-  //   keyPressDiv.current.focus();
-  // }
 
   async function getAnswer() {
     try {
@@ -248,18 +223,15 @@ export default function App() {
   // component load
   useEffect(() => {
 
-    // wake up server container to reduce initial cold-start latency
-    function pingServer() {
-      fetch(`${API_URL}`)
-        .then((response) => response.text()
-          .then((txt) => console.log("ping server: " + txt)))
-        .catch((err) => showToast("Error: " + err));
+    // wake up server container and MongoDb to reduce initial cold-start latency
+    // we don't care about return value
+    function pingServers() {
+      fetch(`${API_URL}/word/2024-03-01`);
     }
 
     //focus input to div
     keyPressDiv.current.focus();
-    pingServer();
-
+    pingServers();
   }, []);
 
   // keypress hack: implement onKeyDown event on outer "game-page" <div> by adding tabIndex={0}
