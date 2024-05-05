@@ -1,0 +1,12 @@
+.game-date {
+  margin: 0;
+  width: 8em;
+  border: none;
+  outline: none;
+  font-size: .9rem !important;
+  color: var(--bs-navbar-color);
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

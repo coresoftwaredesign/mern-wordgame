@@ -1,0 +1,236 @@
+body {
+  --color-background: white;
+  --color-foreground: black;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.toast-msg {
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+}
+
+.game-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  outline: none;
+  padding-top: 50px;
+}
+
+.game-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.game-date {
+  margin: 0;
+  font-size: 1em;
+}
+
+.input-text {
+  margin: 15px;
+  width: 6em;
+  background: none;
+  color: var(--color-foreground);
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 1em;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(6, auto);
+  gap: 0.25em;
+  margin: 1em;
+  max-width: 300px;
+  width: 100%;
+}
+
+.tile {
+  border: 0.05em solid hsl(240, 2%, 23%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 2rem;
+  user-select: none;
+}
+
+.guess {
+  border: 0.1em solid #787c7f;
+}
+
+.unknown {
+  border-color: hsl(200, 1%, 34%);
+}
+
+.not-matched {
+  background-color: #787c7f;
+  color: white;
+}
+
+.in-word {
+  background-color: #c9b457;
+  color: white;
+}
+
+.matched {
+  background-color: #6baa64;
+  color: white;
+}
+
+@keyframes flip-matched {
+  0% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    background-color: white;
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+    background-color: #6baa64;
+    color: white;
+  }
+}
+
+@keyframes flip-in-word {
+  0% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    background-color: white;
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+    background-color: #c9b457;
+    color: white;
+  }
+}
+
+@keyframes flip-not-matched {
+  0% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    background-color: white;
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+    background-color: #787c7f;
+    color: white;
+  }
+}
+
+.flip-matched {
+  animation: flip-matched 500ms ease forwards;
+}
+
+.flip-in-word {
+  animation: flip-in-word 500ms ease forwards;
+}
+
+.flip-not-matched {
+  animation: flip-not-matched 500ms ease forwards;
+}
+
+.tile.shake {
+  animation: shake 250ms ease-in-out;
+}
+
+.tile.dance {
+  animation: flip-matched, dance;
+  animation-fill-mode: forwards, forwards;
+  animation-duration: 500ms, 500ms;
+  animation-timing-function: ease-in-out, ease-in-out;
+}
+
+@keyframes shake {
+  10% {
+    transform: translateX(-5%);
+  }
+
+  30% {
+    transform: translateX(5%);
+  }
+
+  50% {
+    transform: translateX(-7.5%);
+  }
+
+  70% {
+    transform: translateX(7.5%);
+  }
+
+  90% {
+    transform: translateX(-5%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes dance {
+  20% {
+    transform: translateY(-50%);
+  }
+
+  40% {
+    transform: translateY(5%);
+  }
+
+  60% {
+    transform: translateY(-25%);
+  }
+
+  80% {
+    transform: translateY(2.5%);
+  }
+
+  90% {
+    transform: translateY(-5%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.game-button {
+  background-color: hsl(200, 1%, 51%);
+  font-size: 0.75em;
+  color: white;
+  border-radius: 0.25em;
+  padding: 0.5em;
+  border-style: none;
+  margin-left: 0.25em;
+  margin-right: 0.25em;
+}

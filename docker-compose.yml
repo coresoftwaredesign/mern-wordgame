@@ -1,0 +1,13 @@
+services:
+  wordgame-server:
+    build:
+      context: server
+      dockerfile: Dockerfile
+    ports:
+      - '5000:5000'
+  wordgame-client:
+    build:
+      context: client
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'

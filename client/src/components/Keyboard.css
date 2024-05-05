@@ -1,0 +1,50 @@
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(20, minmax(auto, 15px));
+    grid-auto-rows: 60px;
+    gap: .25em;
+    justify-content: center;
+    margin: .5em;
+    max-width: 375px;
+  }
+  
+  .key {
+    font-weight: bold;
+    grid-column: span 2;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(200, 1%, 51%);
+    color: white;
+    fill: white;
+    text-transform: uppercase;
+    border-radius: .25em;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .key.large {
+    grid-column: span 3;
+  }
+  
+  .key > svg {
+    width: 1.5em;
+    height: 1.5em;
+  }
+  
+  .key:hover, .key:focus {
+    --lightness-offset: 10%;
+  }
+
+  .key.matched {
+    background-color: #6baa64;
+  }
+
+  .key.unmatched {
+    background-color: #333536;
+  }
+
+  .key.in-word {
+    background-color: #c9b457;
+  }
